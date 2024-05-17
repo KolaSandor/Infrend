@@ -1,0 +1,95 @@
+<div class="container mt-5">
+    <h2 style="margin-top: 5px; text-align: center; color: #64bc1d; padding: 10px;">Üdvözlünk az Tanárok Kezelésében!</h2>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h3 style="color: #000000;">A Tanárok</h3>
+            <ul class="list-group">
+                <li *ngFor="let teacher of teachers" class="list-group-item" (click)="onSelect(teacher)">
+                    {{ teacher.name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h3 style="color: #000000;">Kiválasztott Tanár</h3>
+            <div *ngIf="selectedTeacher">
+                <h6>{{ selectedTeacher.name }}</h6>
+                <p>ID: {{ selectedTeacher.id }}</p>
+                <h6>Témák:</h6>
+                <ul class="list-group">
+                    <li *ngFor="let subject of selectedTeacher.subjects" class="list-group-item">
+                        {{ subject.name }}
+                    </li>
+                </ul>
+                <button class="btn btn-danger" (click)="deleteTeacher(selectedTeacher.id)">Tanár Törlése</button>
+            </div>
+            <div *ngIf="!selectedTeacher">
+                <p>Válasszon egy tanárt a részletek megtekintéséhez.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h3 style="color: #000000;">Tanár létrehozása</h3>
+            <form (submit)="createTeacher()">
+                <div class="form-group">
+                    <label for="name">Név</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="newTeacher.name" name="name" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Létrehozás</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h3 style="color: #000000;">Tanár frissítése</h3>
+            <div *ngIf="selectedTeacher">
+                <form (submit)="updateTeacher(selectedTeacher.id)">
+                    <div class="form-group">
+                        <label for="name">Név</label>
+                        <input type="text" class="form-control" id="name" [(ngModel)]="selectedTeacher.name" name="name" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Frissítés</button>
+                </form>
+            </div>
+            <div *ngIf="!selectedTeacher">
+                <p>Nincs kiválasztott tanár.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h3 style="color: #000000;">Tantárgy hozzáadása a tanárhoz</h3>
+            <form *ngIf="selectedTeacher" (submit)="addSubjectToTeacher(getTeacherId(selectedTeacher), +subjectId.value)">
+                <div class="form-group">
+                    <label for="subjectId">Tantrágy</label>
+                    <select class="form-control" id="subjectId" #subjectId required>
+                        <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Tantárgy Hozzáadása</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h3 style="color: #000000;">Tantárgy eltávolítása a tanárról</h3>
+            <form *ngIf="selectedTeacher" (submit)="removeSubjectFromTeacher(getTeacherId(selectedTeacher), +subjectId.value)">
+                <div class="form-group">
+                    <label for="removeSubjectId">Téma Azonosító</label>
+                    <select class="form-control" id="removeSubjectId" #subjectId required>
+                        <option *ngFor="let subject of selectedTeacher.subjects" [value]="subject.id">{{ subject.name }}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-danger">Tantárgy Eltávolítása</button>
+            </form>
+        </div>
+    </div>
+</div>

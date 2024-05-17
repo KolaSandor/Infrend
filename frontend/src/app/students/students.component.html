@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <h2 style="text-align: center; color: #64bc1d;">Üdvözlünk az Hallgatóink Kezelésében!</h2>
+  
+    <div class="row mt-5">
+      <div class="col-md-6 mx-auto">
+        <h3 class="mb-0" style="color: #000000; padding: 10px;">Hallgatók</h3>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" style="cursor: pointer;" *ngFor="let student of students" (click)="onSelect(student)">
+            <span style="font-weight: bold;">{{student.name}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="row mt-5">
+      <div class="col-md-6 mx-auto">
+        <h3 style="color: #000000;">Új Hallgató hozzáadása</h3>
+        <form (submit)="createStudent()">
+          <div class="form-group">
+            <label for="name">Név:</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="newStudent.name" name="name" required style="background-color: #f8f9fa; border: 1px solid #6c757d; color: #000;">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" style="border: none;">Létrehozás</button>
+        </form>
+  
+        <h3 class="mt-4" *ngIf="selectedStudent" style="color: #000000;">Kiválasztott Hallgató: <span style="font-weight: bold; color: #000;">{{selectedStudent.name}}</span></h3>
+        <form (submit)="updateStudent()" *ngIf="selectedStudent">
+          <div class="form-group">
+            <label for="updateName">Név:</label>
+            <input type="text" class="form-control" id="updateName" [(ngModel)]="selectedStudent.name" name="updateName" required style="background-color: #f8f9fa; border: 1px solid #6c757d; color: #000;">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" style="border: none;">Frissítés</button>
+        </form>
+  
+        <button class="btn btn-danger mt-3 btn-lg btn-block" (click)="deleteStudent()" *ngIf="selectedStudent" style="background-color: #dc3545; border: none;">Hallgató Törlése</button>
+      </div>
+    </div>
+  </div>
+  

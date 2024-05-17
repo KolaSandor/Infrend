@@ -1,0 +1,24 @@
+.container.mt-3 {
+  background-color: rgb(173, 234, 203);
+  border-radius: 20px;
+  padding: 15px;
+  color: #333;
+}
+
+.btn.btn-primary {
+  margin-top: 15px;
+  background-color: #00e1ff;
+  color: #fff;
+}
+
+.btn.btn-primary:hover {
+  background-color: #00e1ff;
+  border-color: #00e1ff;
+}
+
+h3 {
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+  
+}

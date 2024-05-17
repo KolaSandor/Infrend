@@ -1,0 +1,19 @@
+.col-md-6 {
+  margin-top: 20px;
+  border-radius: 20px;
+  text-align: center;
+  color: #000000;
+  padding: 15px;
+}
+
+.btn.btn-primary {
+  margin-top: 15px;
+  background-color: #00e1ff;
+  border-color: #00e1ff;
+  color: #000000;
+}
+
+.btn.btn-primary:hover {
+  background-color: #00e1ff;
+  border-color: #00e1ff;
+}
